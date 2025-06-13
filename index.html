@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player UI</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>    <!-- Background Video -->
+    <video class="background-video" autoplay muted loop playsinline>
+        <source src="assets/radha-gori-gori.mp4" type="video/mp4">
+    </video>
+    
+    <!-- Audio Element -->
+    <audio id="audioPlayer" preload="metadata">
+        <source src="assets/radha-gori-gori.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    
+    <div class="container">
+        <div class="music-player">            <!-- Song Image -->
+            <div class="album-art">
+                <img src="assets/radha-gori-gori.jpeg" alt="Radha Gori Gori - Indresh Upadhyay Album Art" id="albumImage">
+            </div>
+            
+            <!-- Track Information -->
+            <div class="track-info">
+                <h2 class="track-title">Radha Gori Gori</h2>
+                <p class="artist-name">Indresh Upadhyay</p>
+            </div>
+              <!-- Progress Bar -->
+            <div class="progress-container">
+                <span class="time current-time" id="currentTime">0:00</span>
+                <div class="progress-bar" id="progressBar">
+                    <div class="progress-fill" id="progressFill"></div>
+                    <div class="progress-handle"></div>
+                </div>
+                <span class="time total-time" id="totalTime">0:00</span>
+            </div>
+            
+            <!-- Controls -->
+            <div class="controls">
+                <button class="control-btn previous-btn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 6V18H8V6H6ZM9.5 12L18 6V18L9.5 12Z" fill="currentColor"/>
+                    </svg>
+                </button>
+                
+                <button class="control-btn play-pause-btn" id="playPauseBtn">
+                    <svg class="play-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8 5V19L19 12L8 5Z" fill="currentColor"/>
+                    </svg>
+                    <svg class="pause-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                        <path d="M6 19H10V5H6V19ZM14 5V19H18V5H14Z" fill="currentColor"/>
+                    </svg>
+                </button>
+                
+                <button class="control-btn next-btn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 18L14.5 12L6 6V18ZM16 6V18H18V6H16Z" fill="currentColor"/>
+                    </svg>
+                </button>
+            </div>            <!-- Volume Control -->
+            <div class="volume-control">
+                <svg class="volume-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 9V15H7L12 20V4L7 9H3ZM16.5 12C16.5 10.23 15.48 8.71 14 7.97V16.02C15.48 15.29 16.5 13.77 16.5 12ZM14 3.23V5.29C16.89 6.15 19 8.83 19 12C19 15.17 16.89 17.85 14 18.71V20.77C18.01 19.86 21 16.28 21 12C21 7.72 18.01 4.14 14 3.23Z" fill="currentColor"/>
+                </svg>
+                <div class="volume-bar" id="volumeBar">
+                    <div class="volume-fill" id="volumeFill"></div>
+                </div>
+            </div>
+            
+            <!-- Playlist Selector -->
+            <div class="playlist-selector">
+                <button class="playlist-btn active" data-song-id="radha-gori-gori">
+                    <span class="song-info">
+                        <span class="mini-title">Radha Gori Gori</span>
+                        <span class="mini-artist">Indresh Upadhyay</span>
+                    </span>
+                </button>
+                <button class="playlist-btn" data-song-id="blue-yung-kai">
+                    <span class="song-info">
+                        <span class="mini-title">Blue</span>
+                        <span class="mini-artist">Yung Kai</span>
+                    </span>
+                </button>
+            </div>
+        </div>
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <span class="copyright">Pry Uchiha ©</span>
+                <a href="https://github.com/Priyanshu84iya" target="_blank" class="github-link">
+                    <svg class="github-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 0C5.374 0 0 5.373 0 12C0 17.302 3.438 21.8 8.207 23.387C8.806 23.498 9 23.126 9 22.81V20.576C5.662 21.302 4.967 19.16 4.967 19.16C4.421 17.773 3.634 17.404 3.634 17.404C2.545 16.659 3.717 16.675 3.717 16.675C4.922 16.759 5.556 17.912 5.556 17.912C6.626 19.746 8.363 19.216 9.048 18.909C9.155 18.134 9.466 17.604 9.81 17.305C7.145 17 4.343 15.971 4.343 11.374C4.343 10.063 4.812 8.993 5.579 8.153C5.455 7.85 5.044 6.629 5.696 4.977C5.696 4.977 6.704 4.655 8.997 6.207C9.954 5.941 10.98 5.808 12 5.803C13.02 5.808 14.047 5.941 15.006 6.207C17.297 4.655 18.303 4.977 18.303 4.977C18.956 6.63 18.545 7.851 18.421 8.153C19.191 8.993 19.656 10.064 19.656 11.374C19.656 15.983 16.849 16.998 14.177 17.295C14.607 17.667 15 18.397 15 19.517V22.81C15 23.129 15.192 23.504 15.801 23.386C20.566 21.797 24 17.3 24 12C24 5.373 18.627 0 12 0Z" fill="currentColor"/>
+                    </svg>
+                    <span>GitHub</span>
+                </a>
+            </div>
+        </footer>
+    </div>    <script>
+        // Get audio element and controls
+        const audio = document.getElementById('audioPlayer');
+        const bgVideo = document.querySelector('.background-video');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const playIcon = playPauseBtn.querySelector('.play-icon');
+        const pauseIcon = playPauseBtn.querySelector('.pause-icon');
+        const progressBar = document.getElementById('progressBar');
+        const progressFill = document.getElementById('progressFill');
+        const currentTimeEl = document.getElementById('currentTime');
+        const totalTimeEl = document.getElementById('totalTime');
+        const volumeBar = document.getElementById('volumeBar');
+        const volumeFill = document.getElementById('volumeFill');
+        const albumImage = document.getElementById('albumImage');
+        const trackTitle = document.querySelector('.track-title');
+        const artistName = document.querySelector('.artist-name');
+        const playlistBtns = document.querySelectorAll('.playlist-btn');
+        
+        let isPlaying = false;
+        let isDragging = false;
+        let currentSongId = 'radha-gori-gori';
+        
+        // Song data
+        const songs = {
+            'radha-gori-gori': {
+                title: 'Radha Gori Gori',
+                artist: 'Indresh Upadhyay',
+                audioSrc: 'assets/radha-gori-gori.mp3',
+                imgSrc: 'assets/radha-gori-gori.jpeg',
+                videoSrc: 'assets/radha-gori-gori.mp4'
+            },
+            'blue-yung-kai': {
+                title: 'Blue',
+                artist: 'Yung Kai',
+                audioSrc: 'assets/yung-kai-blue.mp3',
+                imgSrc: 'assets/yung-kai-blue.jpeg',
+                videoSrc: 'assets/yung-kai-blue.mp4'
+            }
+        };
+        
+        // Set initial volume
+        audio.volume = 0.65;
+        volumeFill.style.width = '65%';
+        
+        // Format time function
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+        
+        // Play/Pause functionality
+        playPauseBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                audio.pause();
+                playIcon.style.display = 'block';
+                pauseIcon.style.display = 'none';
+                isPlaying = false;
+            } else {
+                audio.play();
+                playIcon.style.display = 'none';
+                pauseIcon.style.display = 'block';
+                isPlaying = true;
+            }
+        });
+        
+        // Update time and progress
+        audio.addEventListener('timeupdate', () => {
+            if (!isDragging) {
+                const progress = (audio.currentTime / audio.duration) * 100;
+                progressFill.style.width = progress + '%';
+                currentTimeEl.textContent = formatTime(audio.currentTime);
+            }
+        });
+        
+        // Set duration when loaded
+        audio.addEventListener('loadedmetadata', () => {
+            totalTimeEl.textContent = formatTime(audio.duration);
+        });
+        
+        // Progress bar click functionality
+        progressBar.addEventListener('click', (e) => {
+            const rect = progressBar.getBoundingClientRect();
+            const percent = (e.clientX - rect.left) / rect.width;
+            audio.currentTime = percent * audio.duration;
+        });
+        
+        // Progress bar drag functionality
+        progressBar.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            const rect = progressBar.getBoundingClientRect();
+            const percent = (e.clientX - rect.left) / rect.width;
+            progressFill.style.width = percent * 100 + '%';
+            
+            const mouseMoveHandler = (e) => {
+                const rect = progressBar.getBoundingClientRect();
+                const percent = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+                progressFill.style.width = percent * 100 + '%';
+                currentTimeEl.textContent = formatTime(percent * audio.duration);
+            };
+            
+            const mouseUpHandler = (e) => {
+                const rect = progressBar.getBoundingClientRect();
+                const percent = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+                audio.currentTime = percent * audio.duration;
+                isDragging = false;
+                document.removeEventListener('mousemove', mouseMoveHandler);
+                document.removeEventListener('mouseup', mouseUpHandler);
+            };
+            
+            document.addEventListener('mousemove', mouseMoveHandler);
+            document.addEventListener('mouseup', mouseUpHandler);
+        });
+        
+        // Volume control functionality
+        volumeBar.addEventListener('click', (e) => {
+            const rect = volumeBar.getBoundingClientRect();
+            const percent = (e.clientX - rect.left) / rect.width;
+            audio.volume = percent;
+            volumeFill.style.width = percent * 100 + '%';
+        });
+        
+        // Volume drag functionality
+        volumeBar.addEventListener('mousedown', (e) => {
+            const rect = volumeBar.getBoundingClientRect();
+            const percent = (e.clientX - rect.left) / rect.width;
+            volumeFill.style.width = percent * 100 + '%';
+            
+            const mouseMoveHandler = (e) => {
+                const rect = volumeBar.getBoundingClientRect();
+                const percent = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+                volumeFill.style.width = percent * 100 + '%';
+                audio.volume = percent;
+            };
+            
+            const mouseUpHandler = () => {
+                document.removeEventListener('mousemove', mouseMoveHandler);
+                document.removeEventListener('mouseup', mouseUpHandler);
+            };
+            
+            document.addEventListener('mousemove', mouseMoveHandler);
+            document.addEventListener('mouseup', mouseUpHandler);
+        });
+        
+        // Previous/Next button functionality (for demo)
+        document.querySelector('.previous-btn').addEventListener('click', () => {
+            audio.currentTime = Math.max(0, audio.currentTime - 10);
+        });
+        
+        document.querySelector('.next-btn').addEventListener('click', () => {
+            audio.currentTime = Math.min(audio.duration, audio.currentTime + 10);
+        });
+          // Audio ended event
+        audio.addEventListener('ended', () => {
+            playIcon.style.display = 'block';
+            pauseIcon.style.display = 'none';
+            isPlaying = false;
+            progressFill.style.width = '0%';
+            currentTimeEl.textContent = '0:00';
+        });
+        
+        // Function to load a song
+        function loadSong(songId) {
+            const song = songs[songId];
+            
+            // Update audio source
+            audio.src = song.audioSrc;
+              // Update background video
+            bgVideo.querySelector('source').src = song.videoSrc;
+            bgVideo.load();
+            bgVideo.play();
+            
+            // Update album art
+            albumImage.src = song.imgSrc;
+            albumImage.alt = `${song.title} - ${song.artist} Album Art`;
+            
+            // Update track info
+            trackTitle.textContent = song.title;
+            artistName.textContent = song.artist;
+            
+            // Reset progress
+            progressFill.style.width = '0%';
+            currentTimeEl.textContent = '0:00';
+            totalTimeEl.textContent = '0:00';
+            
+            // Update playlist active state
+            playlistBtns.forEach(btn => {
+                if (btn.dataset.songId === songId) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            // Reset play state
+            if (isPlaying) {
+                audio.play();
+            }
+            
+            // Update current song ID
+            currentSongId = songId;
+        }
+        
+        // Add event listeners to playlist buttons
+        playlistBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const songId = btn.dataset.songId;
+                if (songId !== currentSongId) {
+                    loadSong(songId);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
